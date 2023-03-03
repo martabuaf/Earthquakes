@@ -20,7 +20,7 @@ Partiendo del DataFrame anterior visualizaremos los datos en un mapa 3D con plot
 ### Paso 4:
 Convertiremos el mapa en formato GIF y lo mostraremos aquí. ⬇️⬇️⬇️
 
-![earthquakes_global](https://user-images.githubusercontent.com/122131317/222718317-59298328-5497-4400-b94e-dafd9b5d8ec7.gif)
+![earthquakes_global-2](https://user-images.githubusercontent.com/122131317/222721141-5cd21c65-f09f-49ec-add2-db495d6356a4.gif)
 
 <h2 style="text-align:center;">Espero que te haya gustado!! 😄</h2>
 
