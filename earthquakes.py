@@ -21,7 +21,7 @@ import gif
 
 endpoint = f"https://earthquake.usgs.gov/fdsnws/event/1/"
 
-start, end = "2022-01-01" , "2022-01-06"
+start, end = "2022-01-01" , "2023-01-01"
 
 params = {"method"       : "query",
           "eventtype"    : "earthquake",
@@ -29,6 +29,7 @@ params = {"method"       : "query",
           "format"       : "geojson",
           "starttime"    : start, 
           "endtime"      : end,
+          "minmagnitude" : 4.0,
           "updatedafter" : None,
           "limit"        : "10000"}
 
@@ -82,18 +83,18 @@ df_eq['Size'] = (df_eq.Magnitude - x) / (y - x) * (b - a) + a
 
 df_eq.dropna(subset = "Magnitude", inplace = True)
 
-df_eq.style.background_gradient(cmap = "hot_r", subset='Magnitude')
-
 df_eq.to_csv("earthquakes_data.csv", index = False)
 
 ## Creo el gráfico
 
-latitude = [lat[0] for lat in df_eq["Coords"]]
+df_eq = pd.read_csv("earthquakes_data.csv")
 
-longitude = [lon[1] for lon in df_eq["Coords"]]
+latitude = [coord[1:-1].split(", ")[1] for coord in df_eq["Coords"]]
+
+longitude = [coord[1:-1].split(", ")[0] for coord in df_eq["Coords"]]
 
 marker = dict(size = df_eq["Size"],
-              opacity = 0.3,
+              opacity = 0.5,
               reversescale = True,
               autocolorscale = False,
               symbol = 'circle',
@@ -129,4 +130,4 @@ for i in range(-180, 180, 4):
     
 gif.options.matplotlib["dpi"] = 300
 
-gif.save(frames, "earthquakes_2022.gif", duration = 100)
+gif.save(frames, "earthquakes_global.gif", duration = 100)
